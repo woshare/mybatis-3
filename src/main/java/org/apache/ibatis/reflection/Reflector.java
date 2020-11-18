@@ -50,7 +50,9 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
 public class Reflector {
 
   private final Class<?> type;
+  //可读属性的名称集合，可读属性就是存在相应 getter 方法的属性
   private final String[] readablePropertyNames;
+  //可写属性的名称集合，可写属性就是存在相应 setter 方法的属性
   private final String[] writablePropertyNames;
   private final Map<String, Invoker> setMethods = new HashMap<>();
   private final Map<String, Invoker> getMethods = new HashMap<>();
@@ -307,6 +309,12 @@ public class Reflector {
     }
   }
 
+  /**
+   * 方法的签名，method.getReturnType#method.getName:params[0].getType,params[1]
+   * 返回值类型＃方法名称：参数类型列表
+   * @param method
+   * @return
+   */
   private String getSignature(Method method) {
     StringBuilder sb = new StringBuilder();
     Class<?> returnType = method.getReturnType();

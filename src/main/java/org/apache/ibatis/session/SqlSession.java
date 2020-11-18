@@ -30,7 +30,15 @@ import org.apache.ibatis.executor.BatchResult;
  * @author Clinton Begin
  */
 public interface SqlSession extends Closeable {
-
+/** Closeable extends AutoCloseable
+ * 为了更好的管理资源，准确说是资源的释放，当一个资源类实现了该接口close方法，
+ * 在使用try-with-resources语法创建的资源抛出异常后，JVM会自动调用close方法进行资源释放，
+ * 当没有抛出异常正常退出try-block时候也会调用close方法
+ *
+ */
+  /**实现类是DefaultSqlSession
+   *
+   */
   /**
    * Retrieve a single row mapped from the statement key.
    * @param <T> the returned object type

@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ *    Copyright 2009-2020 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -46,10 +46,10 @@ import org.xml.sax.SAXParseException;
  */
 public class XPathParser {
 
-  private final Document document;
-  private boolean validation;
-  private EntityResolver entityResolver;
-  private Properties variables;
+  private final Document document;// Document 对象
+  private boolean validation;//／是否开启验证,验证xml文件头部链接中的dtd文件
+  private EntityResolver entityResolver;//用于加载本地 DTD 文件
+  private Properties variables;//mybatis-config. xml 中＜propteries＞标签定义的键位对集合
   private XPath xpath;
 
   public XPathParser(String xml) {
