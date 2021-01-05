@@ -411,6 +411,17 @@ public class PooledDataSource implements DataSource {
     }
   }
 
+  /**
+   * 1，空闲链接list中有，则从队首拿一个
+   * 2，空闲链接list没有，且没超过最大连接池活跃线程数，则新建一个
+   * 3，空闲链接list没有，且超过最大连接池活跃线程数，则从已经创建的线程池list中取队首
+   * 4，如果取来的链接，有超时的，如果需要手动commit，则rollback，否则从活跃连接池中移除，重新创建一个链接，
+   * 5，如果取来的链接，有超时的，都是正常的活跃链接，则需要等待，重新执行1~5
+   * @param username
+   * @param password
+   * @return
+   * @throws SQLException
+   */
   private PooledConnection popConnection(String username, String password) throws SQLException {
     boolean countedWait = false;
     PooledConnection conn = null;

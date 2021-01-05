@@ -149,10 +149,11 @@ public abstract class BaseExecutor implements Executor {
     List<E> list;
     try {
       queryStack++;
+      // 尝试从一级缓存中获取结果
       list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
-      if (list != null) {
+      if (list != null) {// 缓存名命中，针对存储过程特殊处理，获取缓存中保存的输出类型参数记录到实参对象中
         handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
-      } else {
+      } else {// 缓存不命中，查数据库并更新缓存，本质上调用的是 doQuery 方法
         list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
       }
     } finally {

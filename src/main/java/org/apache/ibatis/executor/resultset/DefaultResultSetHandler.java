@@ -175,7 +175,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   }
 
   //
-  // HANDLE RESULT SETS
+  // HANDLE RESULT SETS  执行过程可以分为两部分：普通结果集映射和多结果集映射。其中，多结果集映射一般用于存储过程，这是一个小众化的需求，所以大部分时候上述方法仅执行第一部分的逻辑
   //
   @Override
   public List<Object> handleResultSets(Statement stmt) throws SQLException {
